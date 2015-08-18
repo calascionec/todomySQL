@@ -1,28 +1,32 @@
 <html>
     <head>
+        <link rel='stylesheet' href='css/bootstrap.css'>
         <title>To Do List</title>
     </head>
     <body>
-        <h1>Welcome to To Do List</h1>
+        <div class='container'>
+            <h1>Welcome to To Do List</h1>
 
-        <p> Create a new category:</p>
+            <p> Create a new category:</p>
 
-        <form action="/categories" method="post">
-            <label for="name">Category name:</label>
-            <input type="text" name="name" id="name">
+            <form action="/categories" method="post">
+                <div class='form-group'>
+                    <label for="name">Category name:</label>
+                    <input type="text" name="name" id="name" class='form-control'>
+                </div>
+                <button type="submit" class='btn-primary'>Add category</button>
+            </form>
 
-            <button type="submit">Add category</button>
-        </form>
-
-        {% if categories is not empty %}
-            <p>Here are all your categories:</p>
-            <ul>
-                {% for category in categories %}
-                    <li><a href="/categories/{{ category.getId }}">{{ category.getName}}</a></li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>There are no categories yet!</p>
-        {% endif %}
+            {% if categories is not empty %}
+                <p>Here are all your categories:</p>
+                <ul>
+                    {% for category in categories %}
+                        <li><a href="/categories/{{ category.getId }}">{{ category.getName}}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>There are no categories yet!</p>
+            {% endif %}
+        </div>
     </body>
 </html>
