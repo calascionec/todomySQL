@@ -158,6 +158,28 @@
              //Assert
              $this->assertEquals($test_Task, $result);
          }
+
+         function test_getDueDate()
+         {
+             //Arrange
+             $name = "Home stuff";
+             $id = null;
+             $test_category = new Category($name, $id);
+             $test_category->save();
+
+             $description = "Wash the dog";
+             $category_id = $test_category->getId();
+             $due_date = '2015.05.04';
+             $test_Task = new Task($description, $id, $category_id, $due_date);
+             $test_Task->save();
+
+             //Act
+             $result = $test_Task->getDueDate();
+
+             //Assert
+             $this->assertEquals('2015.05.04', $result);
+
+         }
      }
 
 ?>
