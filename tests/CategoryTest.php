@@ -17,6 +17,7 @@
         protected function tearDown()
         {
             Category::deleteAll();
+            Task::deleteAll();
         }
 
         function test_getName()
@@ -109,7 +110,7 @@
             $test_task->save();
 
             $description2 = "Meet with boss";
-            $test_task2 = new Task($description, $id, $test_category_id);
+            $test_task2 = new Task($description2, $id, $test_category_id);
             $test_task2->save();
 
             //Act
