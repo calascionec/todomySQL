@@ -31,7 +31,8 @@
 
              $description = "Wash the dog";
              $category_id = $test_category->getId();
-             $test_task = new Task($description, $id, $category_id);
+             $due_date = '2015-08-29';
+             $test_task = new Task($description, $id, $category_id, $due_date);
 
              //Act
              $test_task->save();
@@ -39,6 +40,7 @@
              //Assert
              $result = Task::getAll();
              $this->assertEquals($test_task, $result[0]);
+
          }
 
          function test_getAll()
@@ -51,11 +53,12 @@
 
              $description = "Wash the dog";
              $category_id = $test_category->getId();
-             $test_Task = new Task ($description, $id, $category_id);
+             $due_date = "2020-08-01";
+             $test_Task = new Task ($description, $id, $category_id, $due_date);
              $test_Task->save();
 
              $description2 = "Water the lawn";
-             $test_Task2 = new Task ($description2, $id, $category_id);
+             $test_Task2 = new Task ($description2, $id, $category_id, $due_date);
              $test_Task2-> save();
 
              //Act
@@ -145,11 +148,12 @@
 
              $description = "Wash the Dog";
              $category_id = $test_category->getId();
-             $test_Task = new Task ($description, $id, $category_id);
+             $due_date = "2016-09-10";
+             $test_Task = new Task ($description, $id, $category_id, $due_date);
              $test_Task->save();
 
              $description2 = "Water the Lawn";
-             $test_Task2 = new Task ($description2, $id, $category_id);
+             $test_Task2 = new Task ($description2, $id, $category_id, $due_date);
              $test_Task2->save();
 
              //Act
@@ -169,15 +173,14 @@
 
              $description = "Wash the dog";
              $category_id = $test_category->getId();
-             $due_date = '2015.05.04';
+             $due_date = '2015-05-04';
              $test_Task = new Task($description, $id, $category_id, $due_date);
-             $test_Task->save();
 
              //Act
              $result = $test_Task->getDueDate();
 
              //Assert
-             $this->assertEquals('2015.05.04', $result);
+             $this->assertEquals('2015-05-04', $result);
 
          }
      }
