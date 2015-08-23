@@ -19,7 +19,34 @@
          protected function tearDown()
          {
              Task::deleteAll();
+             Category::deleteAll();
          }
+
+         function test_getDescription()
+         {
+             //Arrange
+             $description = "Do dishes";
+             $test_task = new Task($description);
+
+             //Act
+             $result = $test_task->getDescription();
+
+             //Assert
+             $this->assertEquals($description, $result);
+         }
+
+         function test_setDescription()
+         {
+             //Arrange
+             $description = "Do dishes";
+             $test_task = new Task($description);
+
+             //Act
+             $test_task->setDescription("Drink coffee.");
+             $result = $test_task->setDescription();
+
+             //Assert
+             $this->assertEquals($"Drink coffee.", $result);
 
          function test_save()
          {
