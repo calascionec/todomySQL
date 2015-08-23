@@ -31,6 +31,17 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE categories SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM categories WHERE id = {$this->getId()};");
+        }
+
         static function getAll()
         {
             $returned_categories = $GLOBALS['DB']->query("SELECT * FROM categories");
@@ -63,20 +74,6 @@
             return $found_category;
         }
 
-        function getTasks()
-        {
-            $tasks = array();
-            $returned_tasks = $GLOBALS['DB']->query("SELECT * FROM tasks WHERE category_id = {$this->getId()};");
-            foreach($returned_tasks as $task) {
-                $description = $task['description'];
-                $id = $task['id'];
-                $due_date = $task['due_date'];
-                $category_id = $task['category_id'];
-                $new_Task = new Task($description, $id, $category_id, $due_date);
-                array_push($tasks, $new_Task);
-            }
-            return $tasks;
-        }
     }
 
 ?>
