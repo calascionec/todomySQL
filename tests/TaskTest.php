@@ -219,34 +219,72 @@
 
          }
 
-        //  function test_orderTasks()
-        //  {
-        //      //Arrange
-         //
-        //      $description = "Wash the dog";
-        //      $id = 1;
-        //      $due_date = '2015-08-20';
-        //      $test_Task = new Task($description, $id, $due_date);
-        //      $test_Task->save();
-         //
-        //      $description2 = "Wash the cat";
-        //      $id2 = 3;
-        //      $due_date2 = '2015-08-21';
-        //      $test_Task2 = new Task($description2, $id, $due_date2);
-        //      $test_Task2->save();
-         //
-        //      $description3 = "Wash the car";
-        //      $id3 = 4;
-        //      $due_date3 = '2015-08-14';
-        //      $test_Task3 = new Task($description3, $id, $due_date3);
-        //      $test_Task3->save();
-         //
-        //      //Act
-        //      $result = Task::getAll();
-         //
-        //      //Assert
-        //      $this->assertEquals([$test_Task3, $test_Task, $test_Task2], $result);
-        //  }
+         function test_addCategory()
+         {
+            //Arrange
+            $name = "Work stuff";
+            $id = 1;
+            $test_category = new Category($name, $id);
+            $test_category->save();
+
+            $description = "File reports";
+            $id2 = 2;
+            $test_task = new Task($description, $id2);
+            $test_task->save();
+
+            //Act
+            $test_task->addCategory($test_category);
+
+            //Assert
+            $this->assertEquals($test_task->getCategories(), [$test_category]);
+         }
+
+         function test_getCategories()
+         {
+            //Arrange
+            $name = "Work stuff";
+            $id = 1;
+            $test_category = new Category($name, $id);
+            $test_category->save();
+
+            $name2 = "Volunteer stuff";
+            $id2 = 2;
+            $test_category2 = new Category($name2, $id2);
+            $test_category2->save();
+
+            $description = "File reports";
+            $id3 = 3;
+            $test_task = new Task($description, $id3);
+            $test_task->save();
+
+            //Act
+            $test_task->addCategory($test_category);
+            $test_task->addCategory($test_category2);
+
+            //Assert
+            $this->assertEquals($test_task->getCategories(), [$test_category, $test_category2]);
+         }
+
+         function test_delete()
+         {
+            //Arrange
+            $name = "Work stuff";
+            $id = 1;
+            $test_category = new Category($name, $id);
+            $test_category->save();
+
+            $description = "File reports";
+            $id2 = 2;
+            $test_task = new Task($description, $id2);
+            $test_task->save();
+
+            //Act
+            $test_task->addCategory($test_category);
+            $test_task->delete();
+
+            //Assert
+            $this->assertEquals([], $test_category->getTasks());
+         }
      }
 
 ?>
